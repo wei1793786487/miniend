@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://127.0.0.1:3306/meeting2?&serverTimezone=GMT%2b8
+    password: root
+    username: root
+
+server:
+  port: 10086
+
+#
+#mybatis:
+#  type-aliases-package: com.hqgml.small.pojo
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+    com.hqgml.small.mapper: debug
+
+hqgml:
+  jwt:
+    secret: dqdq@Login(Auth}*^31)&hwwww% # 登录校验的密钥
+    pubKeyPath: G:\jwtdemo\rsa.pub # 公钥地址
+    priKeyPath: G:\jwtdemo\rsa.pri # 私钥地址
+    expire: 10 # 过期时间,单位分钟
+    cookieName: auth
