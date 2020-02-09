@@ -5,10 +5,8 @@ import org.apache.ibatis.annotations.Param;import tk.mybatis.mapper.common.Mappe
 
 /**
  * @author Devil
- * @date 2020/2/6 23:29
+ * @date 2020/2/7 21:39
  */
 public interface MiniUserMapper extends Mapper<MiniUser> {
-    MiniUser selectOneByOpenid(@Param("openid")String openid);
-
-
+    MiniUser selectOneByOpenid(@Param("openid") String openid);
 }

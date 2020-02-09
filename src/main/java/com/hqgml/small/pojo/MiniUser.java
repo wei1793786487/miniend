@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author Devil
- * @date 2020/2/6 23:29
+ * @date 2020/2/7 21:39
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "mini_user")
 public class MiniUser {
     @Id
@@ -20,28 +20,24 @@ public class MiniUser {
     @GeneratedValue(generator = "JDBC")
     private Integer id;
 
-    @Column(name = "`name`")
-    private String name;
+    @Column(name = "p_id")
+    private Integer pId;
 
     @Column(name = "openid")
     private String openid;
 
-
     private Persons persons;
 
-
-
-    public MiniUser(Integer id, String openid) {
-        this.id=id;
+    public MiniUser(Integer id,Integer pId, String openid) {
+        this.pId = pId;
+        this.id = id;
         this.openid = openid;
     }
     public MiniUser(String openid) {
+
         this.openid = openid;
     }
 
-    public MiniUser(Integer id,String name, String openid) {
-        this.id=id;
-        this.name = name;
-        this.openid = openid;
-    }
+
+
 }

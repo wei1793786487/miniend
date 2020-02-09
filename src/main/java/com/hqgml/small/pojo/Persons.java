@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * @author Devil
- * @date 2020/2/6 20:49
+ * @date 2020/2/7 21:37
  */
 @Data
 @Table(name = "persons")
@@ -32,7 +32,4 @@ public class Persons {
 
     @Column(name = "uuid")
     private String uuid;
-
-    @Column(name = "w_uid")
-    private Integer wUid;
 }

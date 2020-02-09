@@ -1,5 +1,8 @@
 package com.hqgml.small.service.impl;
 
+import com.hqgml.small.exception.ExceptionEnums;
+import com.hqgml.small.exception.XxException;
+import com.hqgml.small.pojo.Persons;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.hqgml.small.mapper.PersonsMapper;
@@ -15,5 +18,12 @@ public class PersonsServiceImpl implements PersonsService {
     @Resource
     private PersonsMapper personsMapper;
 
+    @Override
+    public Persons selectByid(Integer id) {
+
+      return personsMapper.selectOneById(id);
+
+    }
 }
+
 

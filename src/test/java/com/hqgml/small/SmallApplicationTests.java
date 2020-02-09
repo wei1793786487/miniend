@@ -1,7 +1,9 @@
 package com.hqgml.small;
 
+import com.hqgml.small.mapper.MeetingMapper;
 import com.hqgml.small.mapper.PersonsMapper;
 import com.hqgml.small.pojo.JwtProperties;
+import com.hqgml.small.pojo.Meeting;
 import com.hqgml.small.pojo.MiniUser;
 import com.hqgml.small.pojo.Persons;
 import com.hqgml.small.service.PersonsService;
@@ -26,9 +28,13 @@ class SmallApplicationTests {
     @Autowired
     private JwtProperties jwtProperties;
 
+    @Autowired
+    private MeetingMapper meetingMapper;
+
     @Test
     void contextLoads() {
-
+        List<Meeting> meetings = meetingMapper.selectMeetingbymini(763);
+        System.out.println(meetings);
     }
 
     @Test

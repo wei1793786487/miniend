@@ -1,5 +1,6 @@
 package com.hqgml.small.service;
 
+import com.hqgml.small.pojo.LoginToken;
 import com.hqgml.small.pojo.MiniUser;
 
 /**
@@ -7,7 +8,7 @@ import com.hqgml.small.pojo.MiniUser;
  * @date 2020/2/6 12:58
  */
 public interface MiniUserService {
-    String getUserInfo(String code);
+    LoginToken getUserInfo(String code);
 
     int insert(MiniUser miniUser);
 
@@ -15,5 +16,6 @@ public interface MiniUserService {
 
 
 }
+
 
 

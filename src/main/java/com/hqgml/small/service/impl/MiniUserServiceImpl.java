@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.hqgml.small.exception.ExceptionEnums;
 import com.hqgml.small.exception.XxException;
 import com.hqgml.small.pojo.JwtProperties;
+import com.hqgml.small.pojo.LoginToken;
 import com.hqgml.small.pojo.MiniUser;
 import com.hqgml.small.utlis.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
 
 import com.hqgml.small.mapper.MiniUserMapper;
 import com.hqgml.small.service.MiniUserService;
@@ -46,7 +46,7 @@ public class MiniUserServiceImpl implements MiniUserService {
 
 
     @Override
-    public String getUserInfo(String code) {
+    public LoginToken getUserInfo(String code) {
         JSONObject jsonObject;
         Map<String, Object> parms = new HashMap<>();
         parms.put("appid", APPID);
@@ -60,8 +60,8 @@ public class MiniUserServiceImpl implements MiniUserService {
             jsonObject = JSON.parseObject(response);
             if (jsonObject.getInteger(ERRCODE) == null) {
                 String openid = jsonObject.getString("openid");
-
-                if (openid!=null){
+                LoginToken loginToken=new LoginToken();
+                if (openid != null) {
                     //看看数据库是不是有存在的，如果有的话就返回查询到的token如果没有的话插入 然后返回新的
                     MiniUser miniUser1 = selectByOpenId(openid);
                     if (miniUser1 == null) {
@@ -69,12 +69,27 @@ public class MiniUserServiceImpl implements MiniUserService {
                         int id = insert(miniUser);
                         miniUser.setId(id);
                         log.info("用户不存在新建");
-                        return JwtUtils.generateToken(miniUser, jwtProperties.getPrivateKey(), jwtProperties.getExpire());
+                        String token = JwtUtils.generateToken(miniUser, jwtProperties.getPrivateKey(), jwtProperties.getExpire());
+                         //用户刚刚创建的时候坑定是不存在绑定的
+                        loginToken.setIsband(false);
+                        loginToken.setToken(token);
+                        return  loginToken;
                     } else {
+
+                        String token = JwtUtils.generateToken(miniUser1, jwtProperties.getPrivateKey(), jwtProperties.getExpire());
+                        loginToken.setToken(token);
+
                         log.info("用户存在使用原始的");
-                        return JwtUtils.generateToken(miniUser1, jwtProperties.getPrivateKey(), jwtProperties.getExpire());
+                       if (miniUser1.getPId()==null){
+                           loginToken.setIsband(false);
+                           log.info("用户没有绑定");
+                       }else {
+                           loginToken.setIsband(true);
+                           log.info("用户绑定了");
+                       }
+                        return loginToken;
                     }
-                }else {
+                } else {
                     throw new XxException(ExceptionEnums.OPENID_ERROR);
                 }
 
@@ -105,5 +120,6 @@ public class MiniUserServiceImpl implements MiniUserService {
 
 
 }
+
 
 

@@ -15,6 +15,8 @@ public class JwtUtils {
 
 
     private static final String JWT_KEY_ID = "id";
+    private static final String JWT_KEY_PID = "pid";
+
     private static final String JWT_KEY_OPNE_ID = "openid";
 
     /**
@@ -29,6 +31,7 @@ public class JwtUtils {
     public static String generateToken(MiniUser miniUser, PrivateKey privateKey, int expireMinutes) throws Exception {
         return Jwts.builder()
                 .claim(JWT_KEY_ID, miniUser.getId())
+                .claim(JWT_KEY_PID, miniUser.getPId())
                 .claim(JWT_KEY_OPNE_ID, miniUser.getOpenid())
                 .setExpiration(DateTime.now().plusMinutes(expireMinutes).toDate())
                 .signWith(SignatureAlgorithm.RS256, privateKey)
@@ -47,6 +50,7 @@ public class JwtUtils {
     public static String generateToken(MiniUser miniUser, byte[] privateKey, int expireMinutes) throws Exception {
         return Jwts.builder()
                 .claim(JWT_KEY_ID, miniUser.getId())
+                .claim(JWT_KEY_PID, miniUser.getPId())
                 .claim(JWT_KEY_OPNE_ID, miniUser.getOpenid())
                 .setExpiration(DateTime.now().plusMinutes(expireMinutes).toDate())
                 .signWith(SignatureAlgorithm.RS256, RsaUtils.getPrivateKey(privateKey))
@@ -92,6 +96,8 @@ public class JwtUtils {
 
         return new MiniUser(
                 ObjectUtils.toInt(body.get(JWT_KEY_ID)),
+                ObjectUtils.toInt(body.get(JWT_KEY_PID)),
+
                 ObjectUtils.toString(body.get(JWT_KEY_OPNE_ID))
 
         );
@@ -110,6 +116,8 @@ public class JwtUtils {
         Claims body = claimsJws.getBody();
         return new MiniUser(
                 ObjectUtils.toInt(body.get(JWT_KEY_ID)),
+                ObjectUtils.toInt(body.get(JWT_KEY_PID)),
+
                 ObjectUtils.toString(body.get(JWT_KEY_OPNE_ID))
 
         );
