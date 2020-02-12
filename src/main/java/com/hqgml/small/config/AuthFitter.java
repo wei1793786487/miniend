@@ -41,7 +41,10 @@ public class AuthFitter implements Filter {
         HttpServletRequest request = (HttpServletRequest) (servletRequest);
         HttpServletResponse response = (HttpServletResponse) (servletResponse);
         String requestUrl = request.getRequestURI();
+
         if (requestUrl.contains("login")) {
+            String token = request.getHeader("token");
+            System.out.println(token);
             //包含直接过滤掉
             filterChain.doFilter(servletRequest, servletResponse);
             log.info("登录不用校验");

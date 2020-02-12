@@ -9,4 +9,7 @@ import org.apache.ibatis.annotations.Param;import tk.mybatis.mapper.common.Mappe
  */
 public interface MiniUserMapper extends Mapper<MiniUser> {
     MiniUser selectOneByOpenid(@Param("openid") String openid);
+    int updatePIdByOpenid(@Param("updatedPId")Integer updatedPId,@Param("openid")String openid);
+
+
 }

@@ -12,6 +12,9 @@ import tk.mybatis.mapper.common.Mapper;
 public interface MeetingMapper extends Mapper<Meeting> {
     List<Meeting> selectMeetingbymini(@Param("id")Integer id);
 
+     Meeting selectById(@Param("id")Integer id);
+
+
 
 
 }

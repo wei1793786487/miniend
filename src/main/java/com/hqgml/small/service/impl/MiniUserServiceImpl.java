@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import com.hqgml.small.mapper.MiniUserMapper;
 import com.hqgml.small.service.MiniUserService;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,7 +76,6 @@ public class MiniUserServiceImpl implements MiniUserService {
                         loginToken.setToken(token);
                         return  loginToken;
                     } else {
-
                         String token = JwtUtils.generateToken(miniUser1, jwtProperties.getPrivateKey(), jwtProperties.getExpire());
                         loginToken.setToken(token);
 
@@ -116,6 +116,14 @@ public class MiniUserServiceImpl implements MiniUserService {
     public MiniUser selectByOpenId(String openid) {
         return miniUserMapper.selectOneByOpenid(openid);
 
+    }
+
+    @Override
+    public void updatePid(String opneid, String pid) {
+        int i = miniUserMapper.updatePIdByOpenid(Integer.parseInt(pid), opneid);
+         if (i!=1){
+             throw new XxException(ExceptionEnums.UPDATA_ERROR);
+         }
     }
 
 

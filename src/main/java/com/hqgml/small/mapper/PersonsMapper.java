@@ -10,5 +10,7 @@ import org.apache.ibatis.annotations.Param;import tk.mybatis.mapper.common.Mappe
 public interface PersonsMapper extends Mapper<Persons> {
     Persons selectOneById(@Param("id")Integer id);
 
+   Persons selectOneByPersonName(@Param("personName")String personName);
+
 
 }

@@ -14,6 +14,7 @@ public interface MiniUserService {
 
     MiniUser selectByOpenId(String openid);
 
+    void updatePid(String opneid,String pid);
 
 }
 

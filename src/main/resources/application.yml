@@ -25,5 +25,5 @@ hqgml:
     secret: dqdq@Login(Auth}*^31)&hwwww% # 登录校验的密钥
     pubKeyPath: G:\jwtdemo\rsa.pub # 公钥地址
     priKeyPath: G:\jwtdemo\rsa.pri # 私钥地址
-    expire: 1 # 过期时间,单位分钟
+    expire: 60 #过期时间,单位分钟
     cookieName: auth

@@ -8,6 +8,8 @@ import com.hqgml.small.pojo.Persons;
  */
 public interface PersonsService {
   Persons selectByid(Integer id);
+
+  Persons selectOneByName(String name);
 }
 
 
