@@ -8,15 +8,11 @@ import com.hqgml.small.pojo.Meeting;
 import com.hqgml.small.pojo.MiniUser;
 import com.hqgml.small.service.MeetingService;
 import com.hqgml.small.utlis.JwtUtils;
-import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Devil
