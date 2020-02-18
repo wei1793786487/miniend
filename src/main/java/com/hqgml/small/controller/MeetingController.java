@@ -43,7 +43,9 @@ public class MeetingController {
                 List<Meeting> meetings = meetingService.selectByMiNiId(miniUser.getPId());
                 Common common = new Common();
                 common.setData(meetings);
-                return ResponseEntity.ok(common);
+            System.out.println("sada");
+
+            return ResponseEntity.ok(common);
         } catch (Exception e) {
             if (e instanceof XxException){
                 throw e;
